@@ -1,0 +1,30 @@
+repositories:
+  - name: hashicorp
+    url: https://helm.releases.hashicorp.com
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: runix 
+    url: https://helm.runix.net/
+
+
+releases:
+  - name: vault                           
+    namespace: vault                     
+    createNamespace: true
+    chart: hashicorp/vault
+    values:
+      - ui:
+          enabled: true
+
+  - name: postgres
+    namespace: vault
+    createNamespace: true
+    chart: bitnami/postgresql
+    values:
+      - image:
+          tag: 16.4.0
+
+  - name: pgadmin
+    namespace: vault
+    createNamespace: true
+    chart: runix/pgadmin4
